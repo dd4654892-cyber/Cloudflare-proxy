@@ -6,35 +6,17 @@
 
 import { connect } from 'cloudflare:sockets';
 
-let subPath = '2b03d668-da90-4d66-9c24-ab617b37acf5';     // 节点订阅路径,不修改将使用uuid作为订阅路径
-let password = '546800';  // 主页密码,建议修改或添加 PASSWORD环境变量
-let proxyIP = 'saas.sin.fan:443';  // 选定周润发同款优选域名作为全局保底
-let yourUUID = '2b03d668-da90-4d66-9c24-ab617b37acf5'; // UUID,建议修改或添加环境便量
+let subPath = 'link';     // 节点订阅路径,不修改将使用uuid作为订阅路径
+let password = '123456';  // 主页密码,建议修改或添加 PASSWORD环境变量
+let proxyIP = 'proxy.xxxxxxxx.tk:50001';  // proxyIP 格式：ip、域名、ip:port、域名:port等,没填写port，默认使用443
+let yourUUID = '5dc15e15-f285-4a9d-959b-0e4fbdd77b63'; // UUID,建议修改或添加环境便量
 let disabletro = false;  // 是否关闭trojan, 设置为true时关闭，false开启 
 
 // CDN 
-let cfip = [
-    // --- 10 个独立的基础优选入口 ---
-    'mfa.gov.ua#新加坡SG-基础/&proxyip=sg.aliyun.fyi', 
-    'saas.sin.fan#香港HK-基础/&proxyip=hk.aliyun.fyi', 
-    'store.ubi.com#日本JP-基础/&proxyip=jp.aliyun.fyi',
-    'cf.130519.xyz#韩国KR-基础/&proxyip=kr.aliyun.fyi',
-    'cf.008500.xyz#香港HK-优选/&proxyip=hk.aliyun.fyi', 
-    'cf.090227.xyz#新加坡SG-优选/&proxyip=sg.aliyun.fyi', 
-    'cf.877774.xyz#英国GB-优选/&proxyip=gb.aliyun.fyi',
-    'cdns.doon.eu.org#德国DE-优选/&proxyip=de.aliyun.fyi',
-    'sub.danfeng.eu.org#台湾TW-优选/&proxyip=tw.aliyun.fyi',
-    'cf.zhetengsha.eu.org#荷兰NL-优选/&proxyip=nl.aliyun.fyi',
-
-    // --- 6 个维护大佬出口 (使用不同入口域名以防单点失效) ---
-    'icook.tw#新加坡SG-天诚/&proxyip=cm.soso.edu.kg', 
-    'ajay.com#香港HK-周润发/&proxyip=zrf.zrf.me', 
-    'csgo.com#日本JP-文烨/&proxyip=sub.keaeye.icu',
-    'visa.com#美国US-Kristi/&proxyip=sub.mot.cloudns.biz',
-    'bing.com#香港HK-青云志/&proxyip=cfsub.cfcdn.xx.kg', 
-    'steamcommunity.com#马来西亚MY-辣子鸡/&proxyip=sub.lzjbaby.com'
-];
-
+let cfip = [ // 格式:优选域名:端口#备注名称、优选IP:端口#备注名称、[ipv6优选]:端口#备注名称、优选域名#备注 
+    'mfa.gov.ua#SG', 'saas.sin.fan#HK', 'store.ubi.com#JP','cf.130519.xyz#KR','cf.008500.xyz#HK', 
+    'cf.090227.xyz#SG', 'cf.877774.xyz#HK','cdns.doon.eu.org#JP','sub.danfeng.eu.org#TW','cf.zhetengsha.eu.org#HK'
+];  // 在此感谢各位大佬维护的优选域名
 
 function closeSocketQuietly(socket) { 
     try { 
